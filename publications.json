@@ -1,0 +1,283 @@
+{
+  "publications": [
+    {
+      "title": "MemCast: Memory-Driven Time Series Forecasting with Experience-Conditioned Reasoning",
+      "authors": [
+        "Xiaoyu Tao",
+        "Mingyue Cheng",
+        "Ze Guo",
+        "Shuo Yu",
+        "Yaguo Liu",
+        "Qi Liu",
+        "Shijin Wang"
+      ],
+      "venue": "Preprint (2026)",
+      "thumbnail": "images/publications/memcast.png",
+      "selected": 1,
+      "award": "",
+      "links": {
+        "code": "https://anonymous.4open.science/r/MemCast"
+      }
+    },
+    {
+      "title": "From Values to Tokens: An LLM-Driven Framework for Context-aware Time Series Forecasting via Symbolic Discretization",
+      "authors": [
+        "Xiaoyu Tao",
+        "Shilong Zhang",
+        "Mingyue Cheng",
+        "Daoyu Wang",
+        "Tingyue Pan",
+        "Bokai Pan",
+        "Changqing Zhang",
+        "Shijin Wang"
+      ],
+      "venue": "Preprint (2026)",
+      "thumbnail": "images/publications/tokencast.png",
+      "selected": 1,
+      "award": "",
+      "links": {
+        "pdf": "https://arxiv.org/abs/2508.09191"
+      }
+    },
+    {
+      "title": "Hierarchical multimodal llms with semantic space alignment for enhanced time series classification",
+      "authors": [
+        "Xiaoyu Tao",
+        "Tingyue Pan",
+        "Mingyue Cheng",
+        "Yucong Luo",
+        "Qi Liu",
+        "Enhong Chen"
+      ],
+      "venue": "ACM Transactions on Intelligent Systems and Technology",
+      "thumbnail": "images/publications/HiTime.png",
+      "selected": 1,
+      "award": "Accepted",
+      "links": {
+        "pdf": "https://dl.acm.org/doi/abs/10.1145/3785505"
+      }
+    },
+    {
+      "title": "TimeMAE: Self-Supervised Representations of Time Series with Decoupled Masked Autoencoders",
+      "authors": [
+        "Mingyue Cheng",
+        "Xiaoyu Tao",
+        "Qi Liu",
+        "Zhiding Liu",
+        "Hao Zhang",
+        "Rujiao Zhang",
+        "Enhong Chen"
+      ],
+      "venue": "WSDM 2026",
+      "thumbnail": "images/publications/timemae.png",
+      "selected": 1,
+      "award": "Accepted",
+      "links": {}
+    },
+    {
+      "title": "InstructTime++: Time Series Classification with Multimodal Language Modeling via Implicit Feature Enhancement",
+      "authors": [
+        "Mingyue Cheng",
+        "Xiaoyu Tao",
+        "Huajian Zhang",
+        "Qi Liu",
+        "Enhong Chen"
+      ],
+      "venue": "Preprint (2026)",
+      "thumbnail": "images/publications/instructtime++.png",
+      "selected": 0,
+      "award": "",
+      "links": {
+        "pdf": "https://arxiv.org/abs/2601.14968"
+      }
+    },
+    {
+      "title": "Cross-Domain Pre-training with Language Models for Transferable Time Series Representations",
+      "authors": [
+        "Mingyue Cheng",
+        "Xiaoyu Tao",
+        "Qi Liu",
+        "Hao Zhang",
+        "Yiheng Chen",
+        "Defu Lian"
+      ],
+      "venue": "WSDM 2025",
+      "thumbnail": "images/publications/CrossTimeNet.png",
+      "selected": 1,
+      "award": "Accepted",
+      "links": {
+        "code": "https://github.com/Mingyue-Cheng/CrossTimeNet"
+      }
+    },
+    {
+      "title": "STaR: Towards Effective and Stable Table Reasoning via Slow-Thinking Large Language Models",
+      "authors": [
+        "Huajian Zhang",
+        "Mingyue Cheng",
+        "Yucong Luo",
+        "Xiaoyu Tao"
+      ],
+      "venue": "WWW 2026",
+      "thumbnail": "images/publications/STaR.png",
+      "selected": 1,
+      "award": "Accepted",
+      "links": {
+        "pdf": "https://arxiv.org/abs/2511.11233"
+      }
+    },
+    {
+      "title": "MemWeaver: A Hierarchical Memory from Textual Interactive Behaviors for Personalized Generation",
+      "authors": [
+        "Shuo Yu",
+        "Mingyue Cheng",
+        "Daoyu Wang",
+        "Qi Liu",
+        "Zirui Liu",
+        "Ze Guo",
+        "Xiaoyu Tao"
+      ],
+      "venue": "The Web Conference (WWW 2026)",
+      "thumbnail": "images/publications/MemWeaver.png",
+      "selected": 1,
+      "award": "Accepted",
+      "links": {
+        "pdf": "https://arxiv.org/abs/2510.07713",
+        "code": "https://github.com/fishsure/MemWeaver"
+      }
+    },
+    {
+      "title": "TableMind: An Autonomous Programmatic Agent for Tool-Augmented Table Reasoning",
+      "authors": [
+        "Chuang Jiang",
+        "Mingyue Cheng",
+        "Xiaoyu Tao",
+        "Qingyang Mao",
+        "Jie Ouyang",
+        "Qi Liu"
+      ],
+      "venue": "WSDM 2026",
+      "thumbnail": "images/publications/TableMind.png",
+      "selected": 1,
+      "award": "Accepted",
+      "links": {
+        "pdf": "https://arxiv.org/abs/2509.06278"
+      }
+    },
+    {
+      "title": "TimeReasoner: Can Slow-thinking LLMs Reason Over Time? Empirical Studies in Time Series Forecasting",
+      "authors": [
+        "Mingyue Cheng",
+        "Jiahao Wang",
+        "Daoyu Wang",
+        "Xiaoyu Tao",
+        "Qi Liu",
+        "Enhong Chen"
+      ],
+      "venue": "WSDM 2026",
+      "thumbnail": "images/publications/timereasoner.png",
+      "selected": 1,
+      "award": "Accepted",
+      "links": {
+        "pdf": "https://arxiv.org/abs/2505.24511"
+      }
+    },
+    {
+      "title": "OneCast: Structured Decomposition and Modular Generation for Cross-Domain Time Series Forecasting",
+      "authors": [
+        "Tingyue Pan",
+        "Mingyue Cheng",
+        "Shilong Zhang",
+        "Zhiding Liu",
+        "Xiaoyu Tao",
+        "Yucong Luo",
+        "Jintao Zhang",
+        "Qi Liu"
+      ],
+      "venue": "Preprint (2026)",
+      "thumbnail": "images/publications/onecast.png",
+      "selected": 0,
+      "award": "",
+      "links": {}
+    },
+    {
+      "title": "AlphaCast: A Human Wisdom-LLM Intelligence Co-Reasoning Framework for Interactive Time Series Forecasting",
+      "authors": [
+        "Xiaohan Zhang",
+        "Tian Gao",
+        "Mingyue Cheng",
+        "Bokai Pan",
+        "Ze Guo",
+        "Yaguo Liu",
+        "Xiaoyu Tao"
+      ],
+      "venue": "Preprint (2026)",
+      "thumbnail": "images/publications/alphacast.png",
+      "selected": 0,
+      "award": "",
+      "links": {}
+    },
+    {
+      "title": "Mind2Report: A Cognitive Deep Research Agent for Expert-Level Commercial Report Synthesis",
+      "authors": [
+        "Mingyue Cheng",
+        "Daoyu Wang",
+        "Qi Liu",
+        "Shuo Yu",
+        "Xiaoyu Tao",
+        "Yuqian Wang",
+        "Chengzhong Chu",
+        "Yu Duan",
+        "Mingkang Long",
+        "Enhong Chen"
+      ],
+      "venue": "Preprint (2026)",
+      "thumbnail": "images/publications/6.png",
+      "selected": 1,
+      "award": "",
+      "links": {
+        "pdf": "https://arxiv.org/abs/2601.04879"
+      }
+    },
+    {
+      "title": "A Comprehensive Survey of Time Series Forecasting: Concepts, Challenges, and Future Directions",
+      "authors": [
+        "Mingyue Cheng",
+        "Zhiding Liu",
+        "Xiaoyu Tao",
+        "Qi Liu",
+        "Jintao Zhang",
+        "Tingyue Pan",
+        "Shilong Zhang",
+        "Panjing He",
+        "Xiaohan Zhang",
+        "Daoyu Wang",
+        "Jiahao Wang",
+        "Enhong Chen"
+      ],
+      "venue": "Preprint (2026)",
+      "thumbnail": "images/publications/survey.png",
+      "selected": 0,
+      "award": "",
+      "links": {
+        "pdf": "https://www.techrxiv.org/doi/full/10.36227/techrxiv.174430535.53879341"
+      }
+    },
+    {
+      "title": "Conditional Denoising Meets Polynomial Modeling: A Flexible Decoupled Framework for Time Series Forecasting",
+      "authors": [
+        "Jintao Zhang",
+        "Mingyue Cheng",
+        "Xiaoyu Tao",
+        "Zhiding Liu",
+        "Daoyu Wang"
+      ],
+      "venue": "IJCAI 2025",
+      "thumbnail": "images/publications/FDF.png",
+      "selected": 1,
+      "award": "Accepted",
+      "links": {
+        "pdf": "https://arxiv.org/abs/2410.13253"
+      }
+    }
+  ]
+}
