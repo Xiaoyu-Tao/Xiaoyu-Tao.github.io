@@ -1,8 +1,8 @@
 // Global variables
 let allPublications = [];
 let allProjects = [];
-let showingSelectedPublications = true;
-let showingSelectedProjects = true;
+let showingSelectedPublications = false;
+let showingSelectedProjects = false;
 
 // Get author name
 function getAuthorName(author) {
@@ -30,15 +30,13 @@ function updateToggleButtonTexts() {
   }
   
   if (toggleHeader) {
-    toggleHeader.textContent = showingSelectedPublications 
-      ? 'Selected Publications'
-      : 'All Publications';
+    // Always display "All Publications"
+    toggleHeader.textContent = 'All Publications';
   }
   
   if (projectsToggleHeader) {
-    projectsToggleHeader.textContent = showingSelectedProjects 
-      ? 'Selected Projects and Competitions'
-      : 'All Projects and Competitions';
+    // Always display "All Projects and Competitions"
+    projectsToggleHeader.textContent = 'All Projects and Competitions';
   }
 }
 
@@ -170,7 +168,8 @@ function loadPublications() {
     .then(data => {
       console.log("Publications loaded successfully:", data);
       allPublications = data.publications;
-      renderPublications(true);
+      // Always show all publications
+      renderPublications(false);
     })
     .catch(error => {
       console.error('Error loading publications:', error);
@@ -196,128 +195,130 @@ function togglePublications() {
 function renderPublications(selectedOnly) {
   const publicationsContainer = document.getElementById('publications-container');
   publicationsContainer.innerHTML = '';
-  
-  const pubsToShow = selectedOnly ? 
-    allPublications.filter(pub => pub.selected === 1) : 
+
+  const pubsToShow = selectedOnly ?
+    allPublications.filter(pub => pub.selected === 1) :
     allPublications;
-  
-  pubsToShow.forEach(publication => {
-    const pubElement = createPublicationElement(publication);
-    publicationsContainer.appendChild(pubElement);
+
+  // Group by year
+  const byYear = {};
+  pubsToShow.forEach(pub => {
+    let year = null;
+    const venue = pub.venue;
+
+    // Extract year from venue
+    const yearMatch = venue.match(/(\d{4})/);
+    if (yearMatch) {
+      year = parseInt(yearMatch[1]);
+    }
+
+    if (!year) {
+      year = 'Other';
+    }
+
+    if (!byYear[year]) {
+      byYear[year] = [];
+    }
+    byYear[year].push(pub);
+  });
+
+  // Sort years in descending order
+  const sortedYears = Object.keys(byYear).sort((a, b) => {
+    if (a === 'Other') return 1;
+    if (b === 'Other') return -1;
+    return b - a;
+  });
+
+  // Render each year group
+  sortedYears.forEach(year => {
+    // Create year heading
+    const yearHeading = document.createElement('h4');
+    yearHeading.style.marginTop = '1.5rem';
+    yearHeading.style.marginBottom = '0.5rem';
+    yearHeading.textContent = year;
+    publicationsContainer.appendChild(yearHeading);
+
+    // Create ordered list for this year
+    const ol = document.createElement('ol');
+    ol.style.fontSize = '12pt';
+
+    byYear[year].forEach(publication => {
+      const pubElement = createPublicationElement(publication);
+      ol.appendChild(pubElement);
+    });
+
+    publicationsContainer.appendChild(ol);
   });
 }
 
 // Create HTML element for a publication
 function createPublicationElement(publication) {
-  const pubItem = document.createElement('div');
-  pubItem.className = 'publication-item';
-  
-  // Create thumbnail
-  const thumbnail = document.createElement('div');
-  thumbnail.className = 'pub-thumbnail';
-  thumbnail.onclick = () => openModal(publication.thumbnail);
-  
-  const thumbnailImg = document.createElement('img');
-  thumbnailImg.src = publication.thumbnail;
-  thumbnailImg.alt = `${publication.title} thumbnail`;
-  thumbnail.appendChild(thumbnailImg);
-  
-  // Create content container
-  const content = document.createElement('div');
-  content.className = 'pub-content';
-  
-  // Add title as link
-  const title = document.createElement('div');
-  title.className = 'pub-title';
-  if (publication.links && publication.links.pdf) {
-    const titleLink = document.createElement('a');
-    titleLink.href = publication.links.pdf;
-    titleLink.textContent = publication.title;
-    titleLink.target = '_blank';
-    titleLink.rel = 'noopener noreferrer';
-    title.appendChild(titleLink);
-  } else {
-    title.textContent = publication.title;
-  }
-  content.appendChild(title);
-  
-  // Add authors with highlight
-  const authors = document.createElement('div');
-  authors.className = 'pub-authors';
-  
+  const listItem = document.createElement('li');
+
   // Format authors with highlighting
   let authorsHTML = '';
   publication.authors.forEach((author, index) => {
-    const displayName = getAuthorName(author);
+    let displayName = getAuthorName(author);
+    let isCorresponding = false;
+    let isEqual = false;
+
+    // Check markers for corresponding author (*) and equal contribution (+)
+    if (displayName.includes('*')) {
+      isCorresponding = true;
+      displayName = displayName.replace('*', '');
+    }
+
+    if (displayName.includes('+')) {
+      isEqual = true;
+      displayName = displayName.replace('+', '');
+    }
+
     if (author.includes('Xiaoyu Tao')) {
-      authorsHTML += `<span class="highlight-name">${displayName}</span>`;
-    } else if (author.includes('Qi Liu') || author.includes('Mingyue Cheng')) {
-      authorsHTML += `<span class="highlight-advisor">${displayName}</span>`;
+      authorsHTML += `<strong>${displayName}</strong>`;
     } else {
       authorsHTML += displayName;
     }
-    
+
+    if (isCorresponding) {
+      authorsHTML += '<sup>*</sup>';
+    }
+
+    if (isEqual) {
+      authorsHTML += '<sup>+</sup>';
+    }
+
     if (index < publication.authors.length - 1) {
       authorsHTML += ', ';
     }
   });
-  
-  authors.innerHTML = authorsHTML;
-  content.appendChild(authors);
-  
-  // Add venue with award if present
-  const venueContainer = document.createElement('div');
-  venueContainer.className = 'pub-venue-container';
-  
-  const venue = document.createElement('div');
-  venue.className = 'pub-venue';
-  venue.textContent = publication.venue;
-  venueContainer.appendChild(venue);
-  
-  // Add award if it exists
-  if (publication.award && publication.award.length > 0) {
-    const award = document.createElement('div');
-    award.className = 'pub-award';
-    award.textContent = publication.award;
-    venueContainer.appendChild(award);
+
+  // Build the list item content
+  let content = authorsHTML + ', ';
+
+  // Add title as plain text (no hyperlink)
+  content += publication.title;
+
+  // Add venue/status
+  content += `. (${publication.venue})`;
+
+  // Add links (wrapped for styling)
+  const links = [];
+  if (publication.links && publication.links.pdf) {
+    links.push(`<a href="${publication.links.pdf}" target="_blank" rel="noopener noreferrer">[PDF]</a>`);
   }
-  
-  content.appendChild(venueContainer);
-  
-  // Add links if they exist
-  if (publication.links) {
-    const links = document.createElement('div');
-    links.className = 'pub-links';
-    
-    if (publication.links.pdf) {
-      const pdfLink = document.createElement('a');
-      pdfLink.href = publication.links.pdf;
-      pdfLink.textContent = '[Paper]';
-      links.appendChild(pdfLink);
-    }
-    
-    if (publication.links.code) {
-      const codeLink = document.createElement('a');
-      codeLink.href = publication.links.code;
-      codeLink.textContent = '[Code]';
-      links.appendChild(codeLink);
-    }
-    
-    if (publication.links.project) {
-      const projectLink = document.createElement('a');
-      projectLink.href = publication.links.project;
-      projectLink.textContent = '[Project Page]';
-      links.appendChild(projectLink);
-    }
-    
-    content.appendChild(links);
+  if (publication.links && publication.links.code) {
+    links.push(`<a href="${publication.links.code}" target="_blank" rel="noopener noreferrer">[Code]</a>`);
   }
-  
-  // Assemble the publication item
-  pubItem.appendChild(thumbnail);
-  pubItem.appendChild(content);
-  
-  return pubItem;
+  if (publication.links && publication.links.project) {
+    links.push(`<a href="${publication.links.project}" target="_blank" rel="noopener noreferrer">[Project]</a>`);
+  }
+
+  if (links.length > 0) {
+    content += ' <span class="pub-links">' + links.join(' ') + '</span>';
+  }
+
+  listItem.innerHTML = content;
+  return listItem;
 }
 
 // Modal functionality for viewing original images
@@ -359,7 +360,8 @@ function loadProjects() {
     .then(data => {
       console.log("Projects loaded successfully:", data);
       allProjects = data.projects;
-      renderProjects(true);
+      // Always show all projects
+      renderProjects(false);
     })
     .catch(error => {
       console.error('Error loading projects:', error);
@@ -384,120 +386,89 @@ function toggleProjects() {
 function renderProjects(selectedOnly) {
   const projectsContainer = document.getElementById('projects-container');
   projectsContainer.innerHTML = '';
-  
-  const projectsToShow = selectedOnly ? 
-    allProjects.filter(proj => proj.selected === 1) : 
+
+  const projectsToShow = selectedOnly ?
+    allProjects.filter(proj => proj.selected === 1) :
     allProjects;
-  
+
+  // Create ordered list
+  const ol = document.createElement('ol');
+  ol.style.fontSize = '12pt';
+
   projectsToShow.forEach(project => {
     const projectElement = createProjectElement(project);
-    projectsContainer.appendChild(projectElement);
+    ol.appendChild(projectElement);
   });
+
+  projectsContainer.appendChild(ol);
 }
 
 // Create HTML element for a project (similar to publication)
 function createProjectElement(project) {
-  const projectItem = document.createElement('div');
-  projectItem.className = 'publication-item'; // Reuse publication styles
-  
-  // Create thumbnail
-  const thumbnail = document.createElement('div');
-  thumbnail.className = 'pub-thumbnail';
-  thumbnail.onclick = () => openModal(project.thumbnail);
-  
-  const thumbnailImg = document.createElement('img');
-  thumbnailImg.src = project.thumbnail;
-  thumbnailImg.alt = `${project.title} thumbnail`;
-  thumbnail.appendChild(thumbnailImg);
-  
-  // Create content container
-  const content = document.createElement('div');
-  content.className = 'pub-content';
-  
-  // Add title as link
-  const title = document.createElement('div');
-  title.className = 'pub-title';
-  if (project.links && (project.links.pdf || project.links.code || project.links.project)) {
-    const titleLink = document.createElement('a');
-    // Prefer PDF, then project page, then code
-    titleLink.href = project.links.pdf || project.links.project || project.links.code;
-    titleLink.textContent = project.title;
-    titleLink.target = '_blank';
-    titleLink.rel = 'noopener noreferrer';
-    title.appendChild(titleLink);
-  } else {
-    title.textContent = project.title;
-  }
-  content.appendChild(title);
-  
-  // Add authors with highlight
-  const authors = document.createElement('div');
-  authors.className = 'pub-authors';
-  
+  const listItem = document.createElement('li');
+
   // Format authors with highlighting
   let authorsHTML = '';
   project.authors.forEach((author, index) => {
-    const displayName = getAuthorName(author);
+    let displayName = getAuthorName(author);
+    let isCorresponding = false;
+
+    // Check if author has * for corresponding author
+    if (displayName.includes('*')) {
+      isCorresponding = true;
+      displayName = displayName.replace('*', '');
+    }
+
     if (author.includes('Xiaoyu Tao')) {
-      authorsHTML += `<span class="highlight-name">${displayName}</span>`;
-    } else if (author.includes('Qi Liu') || author.includes('Mingyue Cheng')) {
-      authorsHTML += `<span class="highlight-advisor">${displayName}</span>`;
+      authorsHTML += `<strong>${displayName}</strong>`;
     } else {
       authorsHTML += displayName;
     }
-    
+
+    if (isCorresponding) {
+      authorsHTML += '<sup>*</sup>';
+    }
+
     if (index < project.authors.length - 1) {
       authorsHTML += ', ';
     }
   });
-  
-  authors.innerHTML = authorsHTML;
-  content.appendChild(authors);
-  
-  // Add venue with award if present
-  const venueContainer = document.createElement('div');
-  venueContainer.className = 'pub-venue-container';
-  
-  const venue = document.createElement('div');
-  venue.className = 'pub-venue';
-  venue.textContent = project.venue;
-  venueContainer.appendChild(venue);
-  
+
+  // Build the list item content
+  let content = authorsHTML + ', ';
+
+  // Add title as link if link exists
+  if (project.links && (project.links.pdf || project.links.code || project.links.project)) {
+    const href = project.links.pdf || project.links.project || project.links.code;
+    content += `<a href="${href}" target="_blank" rel="noopener noreferrer">${project.title}</a>`;
+  } else {
+    content += project.title;
+  }
+
+  // Add venue/status
+  content += `. (${project.venue})`;
+
   // Add award if it exists
   if (project.award && project.award.length > 0) {
-    const award = document.createElement('div');
-    award.className = 'pub-award';
-    award.textContent = project.award;
-    venueContainer.appendChild(award);
+    content += ` ${project.award}`;
   }
-  
-  content.appendChild(venueContainer);
-  
-  // Add links if they exist
-  if (project.links && Object.keys(project.links).length > 0) {
-    const links = document.createElement('div');
-    links.className = 'pub-links';
-    
-    if (project.links.pdf) {
-      const pdfLink = document.createElement('a');
-      pdfLink.href = project.links.pdf;
-      pdfLink.textContent = '[Paper]';
-      links.appendChild(pdfLink);
-    }
-    
-    if (project.links.code) {
-      const codeLink = document.createElement('a');
-      codeLink.href = project.links.code;
-      codeLink.textContent = '[Code]';
-      links.appendChild(codeLink);
-    }
-    
-    content.appendChild(links);
+
+  // Add links
+  const links = [];
+  if (project.links && project.links.pdf) {
+    links.push(`<a href="${project.links.pdf}" target="_blank" rel="noopener noreferrer">[PDF]</a>`);
   }
-  
-  // Assemble the project item
-  projectItem.appendChild(thumbnail);
-  projectItem.appendChild(content);
-  
-  return projectItem;
+  if (project.links && project.links.code) {
+    links.push(`<a href="${project.links.code}" target="_blank" rel="noopener noreferrer">[Code]</a>`);
+  }
+  if (project.links && project.links.project) {
+    links.push(`<a href="${project.links.project}" target="_blank" rel="noopener noreferrer">[Project]</a>`);
+  }
+
+  if (links.length > 0) {
+    content += ' ' + links.join(' ');
+  }
+
+  listItem.innerHTML = content;
+  return listItem;
 }

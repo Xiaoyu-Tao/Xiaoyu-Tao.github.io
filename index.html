@@ -21,13 +21,15 @@
     <link rel="manifest" href="images/favicon/site.webmanifest">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;500;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=2">
 </head>
 <body id="top">
     <header>
         <div class="header-content">
             <h1>Xiaoyu Tao (陶小玉)</h1>
-            <p>PhD Student in Computer Science • University of Science and Technology of China</p>
+            <p>PhD Student in Computer Science and Technology,
+                State Key Laboratory of Cognitive Intelligence,
+                <br>University of Science and Technology of China (USTC)</p>
             <div class="social-links-header">
                 <a href="https://scholar.google.com/citations?user=iTO8ExcAAAAJ&hl=zh-CN"><i class="fas fa-graduation-cap"></i>Google Scholar</a>
                 <a href="mailto:txytiny@mail.ustc.edu.cn"><i class="fas fa-envelope"></i>txytiny@mail.ustc.edu.cn</a>
@@ -40,35 +42,35 @@
 
     <main>
         <section id="about">
-            <p>Hi! This is Xiaoyu Tao, a PhD student in Computer Science at University of Science and Technology of China (USTC). I am from the State Key Laboratory of Cognitive Intelligence. I am advised by Prof. <a href="http://staff.ustc.edu.cn/~qiliuql/">Qi Liu</a> and currently working with Associate Researcher <a href="https://mingyue-cheng.github.io/">Mingyue Cheng</a>.</p>
+            <p>I am a PhD student in  Computer Science at State Key Laboratory of Cognitive Intelligence, University of Science and Technology of China. I am advised by Prof. <a href="http://staff.ustc.edu.cn/~qiliuql/"><span class="highlight-advisor">Qi Liu</span></a> and Associate Researcher <a href="https://mingyue-cheng.github.io/"><span class="highlight-advisor">Mingyue Cheng</span></a>.</p>
         </section>
 
         <section id="research-interest">
             <h2>Research Interest</h2>
-            <p>My research focuses on <strong>time series analysis and large language models</strong>, with particular emphasis on:</p>
+            <p>My research focuses on <strong>time series data mining and large language models</strong>, with particular emphasis on:</p>
             <ul>
-                <li><strong>Time Series Forecasting</strong> - Developing LLM-driven frameworks for time series forecasting, including memory-driven reasoning, symbolic discretization, and multimodal approaches</li>
-                <li><strong>Table Reasoning</strong> - Building autonomous programmatic agents for tool-augmented table reasoning with slow-thinking LLMs</li>
-                <li><strong>Personalized Generation</strong> - Designing hierarchical memory mechanisms from textual interactive behaviors for personalized content generation</li>
-                <li><strong>Deep Research Agents</strong> - Developing cognitive agents for expert-level commercial report synthesis</li>
+                <li><strong>Time Series Representation Learning</strong>:  Developing self-supervised and transferable representations for time series, including masked modeling, cross-domain pretraining, and foundation representations for temporal data.</li>
+                <li><strong>Context-Aware Time Series Modeling</strong>: Designing LLM-driven frameworks that integrate time series with contextual features through symbolic discretization, multimodal alignment, and semantic representation learning.</li>
+                <li><strong>Time Series Forecasting and Anomaly Detection</strong>: Building advanced forecasting and anomaly detection systems that leverage large models to improve prediction accuracy and robustness in complex environments.</li>
+                <li><strong>Agentic Temporal Reasoning</strong>: Developing reasoning-driven and tool-augmented agent frameworks with memory mechanisms to enable adaptive decision-making and intelligent analysis.</li>
             </ul>
         </section>
 
         <section id="publications">
             <div class="publications-header">
-                <h2 id="toggle-header">Selected Publications</h2>
-                <button id="toggle-publications" class="toggle-publications">Show All</button>
+                <h2 id="toggle-header">All Publications</h2>
             </div>
-            <p id="publications-summary" class="section-summary" style="margin-bottom: 1.5rem; color: var(--text-secondary);">My research focuses on time series forecasting and LLM applications. I have published papers on memory-driven time series forecasting (MemCast), LLM-driven context-aware forecasting (TokenCast), slow-thinking LLMs for temporal reasoning (TimeReasoner, WSDM 2026), self-supervised time series representations (TimeMAE, WSDM 2026), hierarchical memory for personalized generation (MemWeaver, WWW 2026), autonomous table reasoning agents (TableMind, STaR), and deep research agents for commercial report synthesis (Mind2Report). I have published 8 papers accepted at CCF A/B tier venues, including 3 as first author or student first author. Additionally, I have 3 papers under review as first author or student first author.</p>
+            <!-- <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 0.25rem 0 0.75rem;">
+                (* Corresponding Author, + Equal Contribution)
+            </p> -->
             <div id="publications-container">
-                <!-- Publications will be dynamically loaded here -->
+                <!-- Publications will be dynamically loaded here, grouped by year -->
             </div>
         </section>
 
         <section id="projects">
             <div class="publications-header">
-                <h2 id="projects-toggle-header">Selected Projects and Competitions</h2>
-                <button id="toggle-projects" class="toggle-publications">Show All</button>
+                <h2 id="projects-toggle-header">All Projects and Competitions</h2>
             </div>
             <div id="projects-container">
                 <!-- Projects will be dynamically loaded here -->
@@ -109,15 +111,15 @@
         </section>
     </main>
 
-    <footer>
+    <!-- <footer>
         <p>Last updated: October 2025. Design and source code from <a href="https://github.com/yuhui-zh15/Minimal-Academic-Website">Minimal-Academic-Website</a>.</p>
         <p><strong>Acknowledgments:</strong> Special thanks to my classmate <a href="https://melmaphother.github.io/">Daoyu Wang</a> for his valuable assistance and support.</p>
-    </footer>
+    </footer> -->
 
     <div id="imageModal" class="modal">
         <span class="modal-close" onclick="closeModal()">&times;</span>
         <img class="modal-content" id="modalImage">
     </div>
-    <script src="scripts.js"></script>
+    <script src="scripts.js?v=3"></script>
 </body>
 </html>

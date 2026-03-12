@@ -13,12 +13,22 @@
 body {
   font-family: 'Merriweather', Georgia, 'Times New Roman', serif;
   line-height: 1.6;
-  max-width: 800px;
+  max-width: 960px;
   margin: 0 auto;
-  padding: 1.5rem;
+  padding: 1rem;
   color: var(--text-color);
   background-color: var(--bg-color);
   font-weight: 300;
+}
+
+/* Base link styles: follow body text color by default */
+a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--text-color);
 }
 
 /* Chinese font stack */
@@ -28,21 +38,23 @@ html[lang="zh"] {
 }
 
 header {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
   border-bottom: 1px solid var(--border-color);
-  padding-bottom: 1rem;
+  padding-bottom: 0.75rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 2rem;
 }
 
 .header-content {
   flex: 1;
+  padding-right: 1rem;
 }
 
 .header-image img {
-  width: 130px;
-  height: 130px;
+  width: 115px;
+  height: 115px;
   object-fit: cover;
   border-radius: 50%;
   border: 2px solid var(--border-color);
@@ -93,9 +105,9 @@ nav a, .social-links-header a {
 }
 
 nav a:hover, .social-links-header a:hover {
-  color: var(--accent-color);
-  background-color: rgba(204, 120, 92, 0.08);
-  transform: translateX(var(--animation-offset));
+  color: var(--text-color);
+  background-color: transparent;
+  transform: none;
 }
 
 .social-links-header {
@@ -130,9 +142,9 @@ nav a:hover, .social-links-header a:hover {
 }
 
 .lang-switch-btn:hover {
-  color: var(--accent-color);
-  background-color: rgba(204, 120, 92, 0.08);
-  transform: translateX(var(--animation-offset));
+  color: var(--text-color);
+  background-color: transparent;
+  transform: none;
 }
 
 .scholar-citations {
@@ -165,8 +177,8 @@ nav a:hover, .social-links-header a:hover {
 }
 
 section {
-  margin-bottom: 2rem;
-  scroll-margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  scroll-margin-top: 0.5rem;
   animation: fadeIn 0.8s ease-out;
   width: 100%;
 }
@@ -180,9 +192,9 @@ section {
 }
 
 .toggle-publications {
-  background-color: rgba(204, 120, 92, 0.08);
-  color: var(--accent-color);
-  border: none;
+  background-color: transparent;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
   padding: 0.5rem 1rem;
   border-radius: 4px;
   cursor: pointer;
@@ -191,8 +203,8 @@ section {
 }
 
 .toggle-publications:hover {
-  background-color: var(--accent-color);
-  color: white;
+  background-color: var(--border-color);
+  color: var(--text-color);
 }
 
 .publication-item {
@@ -243,7 +255,7 @@ section {
 }
 
 .pub-title a:hover {
-  color: var(--accent-color);
+  color: var(--text-color);
 }
 
 .pub-authors {
@@ -255,12 +267,12 @@ section {
 
 .highlight-name {
   font-weight: 700;
-  color: var(--accent-color);
+  color: var(--text-color);
 }
 
 .highlight-advisor {
-  font-weight: 700;
-  color: var(--text-color);
+  font-weight: 400;
+  color: var(--accent-color);
 }
 
 .pub-venue-container {
@@ -280,14 +292,13 @@ section {
 .pub-award {
   font-size: 0.85rem;
   font-weight: 500;
-  color: #fff;
-  background-color: var(--accent-color);
+  color: var(--text-color);
+  background-color: transparent;
   padding: 0.15rem 0.5rem;
   border-radius: 4px;
   display: inline-block;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: none;
   white-space: nowrap;
-  animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
@@ -304,24 +315,21 @@ section {
 
 .pub-links {
   font-size: 0.85rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  display: inline;
 }
 
 .pub-links a {
   color: var(--accent-color);
-  transition: all var(--transition-time) ease;
-  padding: 0.2rem 0.5rem;
-  border-radius: 4px;
-  background-color: rgba(204, 120, 92, 0.08);
+  text-decoration: none;
+  transition: color var(--transition-time) ease;
+}
+
+.pub-links a + a {
+  margin-left: 0.4rem;
 }
 
 .pub-links a:hover {
-  color: #fff;
-  background-color: var(--accent-color);
-  transform: translateX(3px);
-  box-shadow: 0 2px 5px rgba(204, 120, 92, 0.2);
+  color: var(--accent-hover);
 }
 
 /* Awards section */
@@ -334,7 +342,7 @@ section {
 
 .award-year {
   font-weight: 500;
-  color: var(--accent-color);
+  color: var(--text-color);
   flex: 0 0 110px;
   text-align: left;
   line-height: 1.4;
@@ -383,14 +391,14 @@ section {
 }
 
 .news-list li:hover {
-  border-left-color: var(--accent-color);
+  border-left-color: var(--text-color);
 }
 
 /* Services and misc */
 .service-title {
   font-weight: 500;
   margin-bottom: 0.35rem;
-  color: var(--accent-color);
+  color: var(--text-color);
 }
 
 .service-category p, .misc-item p {
@@ -409,13 +417,13 @@ footer {
 
 /* Generic styles */
 a {
-  color: var(--accent-color);
+  color: var(--text-color);
   text-decoration: none;
   transition: color var(--transition-time) ease;
 }
 
 a:hover {
-  color: var(--accent-hover);
+  color: var(--text-color);
 }
 
 em {
@@ -433,7 +441,7 @@ p {
 
 strong {
   font-weight: 600;
-  color: var(--accent-color);
+  color: var(--text-color);
 }
 
 /* Modal styles */
