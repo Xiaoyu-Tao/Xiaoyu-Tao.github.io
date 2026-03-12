@@ -6,7 +6,7 @@ Personal academic homepage for **Xiaoyu Tao (陶小玉)**, PhD student in Comput
 
 - **Affiliation:** State Key Laboratory of Cognitive Intelligence, USTC  
 - **Advisor:** [Prof. Qi Liu](http://staff.ustc.edu.cn/~qiliuql/)  
-- **Research:** Time series analysis, LLM-driven forecasting, table reasoning, personalized generation, deep research agents  
+- **Research:** Time series analysis, LLM-driven forecasting 
 
 ## Site
 
